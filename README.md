@@ -4,11 +4,11 @@
 * The `check_redirects` function takes `base_url` and `paths` as arguments.
 * The script combines the base URL with each relative path using `urljoin`.
 * The script sends a GET request to each combined URL and prints the HTTP status code and final URL after any redirects, or indicates if there were no redirects.
-* In the __main__ block, it checks if there are enough command-line arguments and calls `check_redirects` with the base URL and relative paths.
+* The __main__ block checks for enough command-line arguments and calls `check_redirects` with the base URL and relative paths.
 
 ## Requirements
 
-- Python 3.x
+- Python 3 minimum 
 - `requests` library
 
 ## Installation
@@ -16,8 +16,8 @@
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/Ashley-Edge/My-scripts.git
-    cd My-scripts
+    git clone https://github.com/Ashley-Edge/URL_Redirect_Checker.git
+    cd URL_Redirect_Checker
     ```
 
 2. **Install dependencies**:
