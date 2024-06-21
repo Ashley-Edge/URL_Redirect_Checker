@@ -29,13 +29,13 @@
 ## Usage
 
 ```bash
-python check_redirects.py <base_url> <path1> <path2> ...
+python <path to file>/check_redirects.py <base_url> <path1> <path2> ...
 ```
 ### Example
 For a base URL of 'https://www.example.com' and paths '/home/women/shoes' and '/home/men/shirts':
 #### Command
 ```bash
-python check_redirects.py https://www.example.com /home/women/shoes /home/men/shirts
+python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.com /home/women/shoes /home/men/shirts
 ```
 #### Output
 ```bash
