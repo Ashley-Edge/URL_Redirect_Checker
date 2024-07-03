@@ -11,21 +11,6 @@
 - Python 3 minimum 
 - `requests` library
 
-## Installation
-
-1. **Clone the repository**:
-
-    ```bash
-    git clone https://github.com/Ashley-Edge/URL_Redirect_Checker.git
-    cd URL_Redirect_Checker
-    ```
-
-2. **Install dependencies**:
-
-    ```bash
-    pip install requests
-    ```
-
 ## Usage
 
 ```bash
