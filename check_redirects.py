@@ -7,6 +7,11 @@ from urllib.parse import urljoin
 
 
 def check_redirects(base_url, paths):
+    # Adding common browser User-Agents - to act more like curl
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': base_url,  # Adding a referer header
+    }
     # Loop through each path
     for path in paths:
         # Combine the base URL with the relative path
