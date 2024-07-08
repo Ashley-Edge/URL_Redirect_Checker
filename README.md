@@ -16,19 +16,44 @@
 ```bash
 python <path to file>/check_redirects.py <base_url> <path1> <path2> ...
 ```
-### Example
-For a base URL of 'https://www.example.com' and paths '/home/women/shoes' and '/home/men/shirts':
-#### Command
-```bash
-python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.com /home/women/shoes /home/men/shirts
-```
-#### Output
-```bash
-Processing URL: https://www.example.com/home/women/shoes
-HTTP Status Code: 301
-Redirect URL: https://www.example.com/home/women/new-shoes
+For a base URL of 'https://www.example.com' and the paths '/women/shoes' and '/men/shirts':
 
-Processing URL: https://www.example.com/home/men/shirts
-HTTP Status Code: 200
+### Output Examples
+For a base URL of 'https://www.example.com' and the paths '/women/shoes' and '/men/shirts':
+```bash
+python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.com /women/shoes /men/shirts
+```
+#### Redirects
+```bash
+Processing URL: https://www.example.com/women/shoes
+Status code: 301
+Final URL Location: https://www.example.com/women/new-shoes
+```
+#### No Redirect
+```bash
+Processing URL: https://www.example.com/women/shoes
+Status code: 200
 No Redirect
 ```
+#### Output with more than one path called
+```bash
+Processing URL: https://www.example.com/women/shoes
+Status code: 301
+Final URL Location: https://www.example.com/women/new-shoes
+
+Processing URL: https://www.example.com/men/shirts
+Status code: 200
+No Redirect
+```
+#### Error While Processing
+```bash
+Processing URL: https://www.example.com/women/shoes
+Error While Processing: 404 Client Error: Not Found for https://www.example.com/women/shoes
+```
+#### Timed out
+```bash
+Processing URL: https://www.example.com/women/shoes
+Request to https://www.example.com/women/shoes has timed out.
+```
+## Updates
+1. Monday 8<sup>th</sup> of July 2024 ~ `edit_outputs` Tidying up the output and adding in a timeout after 10 seconds with an error message.
