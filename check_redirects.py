@@ -16,7 +16,8 @@ def check_redirects(base_url, paths):
     for path in paths:
         # Combine the base URL with the relative path
         url = urljoin(base_url, path)
-        print(f"Processing URL: {url}")
+        print("____________________________________________________________\n")
+        print(f"Processing URL: {url}\n")
 
         try:
             # Send a GET request and allow redirects
@@ -25,24 +26,28 @@ def check_redirects(base_url, paths):
             # Get the final URL and status code after all redirects
             final_url = response.url
             final_status_code = response.status_code
-            print(f"Status code: {final_status_code}")
 
             # Check if there was a redirect
             if response.history:
-                print(f"Final URL Location: {final_url}\n")
+                status_chain = [resp.status_code for resp in response.history] + [final_status_code]
+                print(f"    Status code chain: {' -> '.join(map(str, status_chain))}")
+                print(f"    Final URL Location: {final_url}\n")
             else:
-                print("No Redirect\n")
+                print(f"* No redirect applied * Status code: {final_status_code}\n")
 
         # Error messages
         except requests.Timeout:
-            print(f"Request to {url} timed has out.\n")
+            print(f"    * This request has timed out *\n")
         except requests.RequestException as e:
-            print(f"Error While Processing: {e} for {url}\n")
+            print(f"    * Error While Processing * {e} for {url}\n")
+    print("____________________________________________________________\n")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
+        print("____________________________________________________________\n")
         print("Usage: python check_redirects.py <base_url> <path1> <path2> ...")
+        print("____________________________________________________________\n")
         sys.exit(1)
 
     base_url = sys.argv[1]

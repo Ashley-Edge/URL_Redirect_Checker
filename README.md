@@ -25,36 +25,61 @@ python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.c
 ```
 #### Redirects
 ```bash
+____________________________________________________________
+
 Processing URL: https://www.example.com/women/shoes
-Status code: 301
-Final URL Location: https://www.example.com/women/new-shoes
+
+    Status code chain: 301 -> 200
+    Final URL Location: https://www.example.com/women/new-shoes
+____________________________________________________________
 ```
 #### No Redirect
 ```bash
+____________________________________________________________
+
 Processing URL: https://www.example.com/women/shoes
-Status code: 200
-No Redirect
+
+* No redirect applied * Status code: 200
+
+____________________________________________________________
 ```
 #### Output with more than one path called
 ```bash
+____________________________________________________________
+
 Processing URL: https://www.example.com/women/shoes
-Status code: 301
-Final URL Location: https://www.example.com/women/new-shoes
+
+    Status code chain: 301 -> 200
+    Final URL Location: https://www.example.com/women/new-shoes
+____________________________________________________________
 
 Processing URL: https://www.example.com/men/shirts
-Status code: 200
-No Redirect
+
+* No redirect applied * Status code: 200
+
+____________________________________________________________
 ```
 #### Error While Processing
 ```bash
+____________________________________________________________
+
 Processing URL: https://www.example.com/women/shoes
-Error While Processing: 404 Client Error: Not Found for https://www.example.com/women/shoes
+
+    * Error While Processing * 404 Client Error: Not Found for https://www.example.com/women/shoes
+____________________________________________________________
+
 ```
 #### Timed out
 ```bash
+____________________________________________________________
+
 Processing URL: https://www.example.com/women/shoes
-Request to https://www.example.com/women/shoes has timed out.
+
+    * This request has timed out *
+____________________________________________________________
+
 ```
 ## Updates
 1. Monday 8<sup>th</sup> of July 2024 ~ `edit_outputs` Tidying up the output and adding in a timeout after 10 seconds with an error message.
 2. Monday 8<sup>th</sup> of July 2024 ~ `Headers` Adding common browser User-Agents, this acts more like curl (used my script IRL and the output compared to curl differed)
+3. Wednesday 7<sup>th</sup> of August 2014 ~ Made the outputs pretty.
