@@ -82,4 +82,5 @@ ____________________________________________________________
 ## Updates
 1. Monday 8<sup>th</sup> of July 2024 ~ `edit_outputs` Tidying up the output and adding in a timeout after 10 seconds with an error message.
 2. Monday 8<sup>th</sup> of July 2024 ~ `Headers` Adding common browser User-Agents, this acts more like curl (used my script IRL and the output compared to curl differed)
-3. Wednesday 7<sup>th</sup> of August 2014 ~ Made the outputs pretty.
+3. Wednesday 7<sup>th</sup> of August 2024 ~ Made the outputs pretty.
+4. Thursday 8<sup>th</sup> of August 2024 ~ Added more `Headers`, switched from `GET` to `HEAD`to mimic `curl -IL` closer. Added a `requests.Session` to maintain headers and cookies across requests 
