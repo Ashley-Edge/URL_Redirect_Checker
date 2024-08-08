@@ -15,6 +15,8 @@ def check_redirects(base_url, paths):
         'User-Agent': 'curl/7.64.1',
         'Accept': '*/*',
         'Referer': base_url,
+        'Connection': 'keep-alive',
+        'Accept-Encoding': 'gzip, deflate, br',
     }
     session.headers.update(headers)
 
@@ -27,7 +29,9 @@ def check_redirects(base_url, paths):
 
         try:
             # Send a GET request and allow redirects
-            response = requests.get(url, allow_redirects=True, timeout=10)
+            # response = requests.get(url, allow_redirects=True, timeout=10)
+            # Send a HEAD request to match curl -IL behavior
+            response = session.head(url, allow_redirects=True, timeout=10)
 
             # Get the final URL and status code after all redirects
             final_url = response.url
