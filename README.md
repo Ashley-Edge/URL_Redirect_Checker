@@ -89,3 +89,5 @@ Processing URL: https://www.example.com/women/shoes
 3. Wednesday 7<sup>th</sup> of August 2024 ~ Made the outputs pretty.
 4. Thursday 8<sup>th</sup> of August 2024 ~ Added more `Headers`, switched from `GET` to `HEAD`to mimic `curl -IL` closer. Added a `requests.Session` to maintain headers and cookies across requests 
 5. Wed 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
+
+TEST
