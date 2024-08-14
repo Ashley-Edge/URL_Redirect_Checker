@@ -1,7 +1,25 @@
 #!/usr/bin/env python3
 
-# Imports needed
+# Import modules needed
 import sys
+
+# Check for required packages
+required_packages = ['requests']
+
+def check_dependencies():
+    import importlib
+    for package in required_packages:
+        try:
+            importlib.import_module(package)
+        except ImportError:
+            print(f"\n    * Error * '{package}' is not installed. Please install it using 'pip install -r requirements.txt'")
+            print("--------------------------------------------------------------------------------------------------------\n")
+            sys.exit(1)
+
+# Check dependencies before importing other modules
+check_dependencies()
+
+# Import rest of themodules needed
 import requests
 from urllib.parse import urljoin
 
@@ -24,12 +42,10 @@ def check_redirects(base_url, paths):
     for path in paths:
         # Combine the base URL with the relative path
         url = urljoin(base_url, path)
-        print("____________________________________________________________\n")
+        print("------------------------------------------------------------------------------\n")
         print(f"Processing URL: {url}\n")
 
         try:
-            # Send a GET request and allow redirects
-            # response = requests.get(url, allow_redirects=True, timeout=10)
             # Send a HEAD request to match curl -IL behavior
             response = session.head(url, allow_redirects=True, timeout=10)
 
@@ -49,15 +65,15 @@ def check_redirects(base_url, paths):
         except requests.Timeout:
             print(f"    * This request has timed out *\n")
         except requests.RequestException as e:
-            print(f"    * Error While Processing * {e} for {url}\n")
-    print("____________________________________________________________\n")
+            print(f"    * Error While Processing * {e} for {url}")
+    print("------------------------------------------------------------------------------\n")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("____________________________________________________________\n")
-        print("Usage: python check_redirects.py <base_url> <path1> <path2> ...")
-        print("____________________________________________________________\n")
+        print("------------------------------------------------------------------------------")
+        print("Incorrect Usage: python check_redirects.py <base_url> <path1> <path2> ...")
+        print("------------------------------------------------------------------------------\n")
         sys.exit(1)
 
     base_url = sys.argv[1]
