@@ -9,7 +9,7 @@
 ## Requirements
 
 - Python 3 minimum 
-- `requests` library
+- `requests` library - this script will detact if this isn't installed and prompt the user to install it.
 
 ## Usage
 
