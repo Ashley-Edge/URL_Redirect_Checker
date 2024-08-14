@@ -25,58 +25,62 @@ python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.c
 ```
 #### Redirects
 ```bash
-____________________________________________________________
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/women/shoes
 
     Status code chain: 301 -> 200
     Final URL Location: https://www.example.com/women/new-shoes
-____________________________________________________________
+
+------------------------------------------------------------------------
 ```
 #### No Redirect
 ```bash
-____________________________________________________________
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/women/shoes
 
 * No redirect applied * Status code: 200
 
-____________________________________________________________
+------------------------------------------------------------------------
 ```
 #### Output with more than one path called
 ```bash
-____________________________________________________________
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/women/shoes
 
     Status code chain: 301 -> 200
     Final URL Location: https://www.example.com/women/new-shoes
-____________________________________________________________
+
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/men/shirts
 
 * No redirect applied * Status code: 200
 
-____________________________________________________________
+------------------------------------------------------------------------
 ```
 #### Error While Processing
 ```bash
-____________________________________________________________
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/women/shoes
 
     * Error While Processing * 404 Client Error: Not Found for https://www.example.com/women/shoes
-____________________________________________________________
+
+------------------------------------------------------------------------
 
 ```
 #### Timed out
 ```bash
-____________________________________________________________
+------------------------------------------------------------------------
 
 Processing URL: https://www.example.com/women/shoes
 
     * This request has timed out *
-____________________________________________________________
+
+------------------------------------------------------------------------
 
 ```
 ## Updates
@@ -84,3 +88,4 @@ ____________________________________________________________
 2. Monday 8<sup>th</sup> of July 2024 ~ `Headers` Adding common browser User-Agents, this acts more like curl (used my script IRL and the output compared to curl differed)
 3. Wednesday 7<sup>th</sup> of August 2024 ~ Made the outputs pretty.
 4. Thursday 8<sup>th</sup> of August 2024 ~ Added more `Headers`, switched from `GET` to `HEAD`to mimic `curl -IL` closer. Added a `requests.Session` to maintain headers and cookies across requests 
+5. Wed 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
