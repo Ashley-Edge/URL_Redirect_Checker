@@ -25,62 +25,70 @@ python Ashley_Code/URL_Redirect_Checker/check_redirects.py https://www.example.c
 ```
 #### Redirects
 ```bash
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Processing URL: https://www.example.com/women/shoes
+♡ Redirect Applied ♡
 
-    Status code chain: 301 -> 200
-    Final URL Location: https://www.example.com/women/new-shoes
+    Full redirect chain
+        Original URL : https://www.example.com/dogs
+        -> Final URL : https://www.example.com/cute-dogs
 
-------------------------------------------------------------------------
+    Status code chain:  301 -> 200
+
+-------------------------------------------------------------------------------------
+Final status & URL: (200) https://www.example.com/cute-dogs
+-------------------------------------------------------------------------------------
 ```
 #### No Redirect
 ```bash
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Processing URL: https://www.example.com/women/shoes
+♡ No redirect applied ♡
+    Complete URL: https://www.example.com/cute-dogs
+    Status code : 200
 
-* No redirect applied * Status code: 200
-
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 ```
-#### Output with more than one path called
+#### Output with more than one in the chain
 ```bash
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Processing URL: https://www.example.com/women/shoes
+♡ Redirect Applied ♡
+    Full redirect chain
+        Original URL : https://www.example.com/dogs
+        -> Final URL : https://www.example.com/cute-dogs
+    Status code chain:  301 -> 200
 
-    Status code chain: 301 -> 200
-    Final URL Location: https://www.example.com/women/new-shoes
+-------------------------------------------------------------------------------------
+Final status & URL: (200) https://www.example.com/cute-dogs
+-------------------------------------------------------------------------------------
+```
+#### Requests isn't installed
+```bash
+-------------------------------------------------------------------------------------
 
-------------------------------------------------------------------------
+* Error * 'requests' is not installed. Please install it using 'pip install requests'
 
-Processing URL: https://www.example.com/men/shirts
-
-* No redirect applied * Status code: 200
-
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 ```
 #### Error While Processing
 ```bash
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Processing URL: https://www.example.com/women/shoes
+* Error While Processing https://www.example.com/cute-dogs *
+        404 Client Error: XYZ
 
-    * Error While Processing * 404 Client Error: Not Found for https://www.example.com/women/shoes
-
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 ```
 #### Timed out
 ```bash
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Processing URL: https://www.example.com/women/shoes
+* This request has timed out *
+        https://www.example.com/cute-dogs
 
-    * This request has timed out *
-
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 ```
 ## Updates
@@ -88,4 +96,5 @@ Processing URL: https://www.example.com/women/shoes
 2. Monday 8<sup>th</sup> of July 2024 ~ `Headers` Adding common browser User-Agents, this acts more like curl (used my script IRL and the output compared to curl differed)
 3. Wednesday 7<sup>th</sup> of August 2024 ~ Made the outputs pretty.
 4. Thursday 8<sup>th</sup> of August 2024 ~ Added more `Headers`, switched from `GET` to `HEAD`to mimic `curl -IL` closer. Added a `requests.Session` to maintain headers and cookies across requests 
-5. Wed 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
+5. Wednesday 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
+6, Thureday 22<sup>nd</sup> of August 2024 ~ created a dynamic line seperator function that bases the number of `-` on the width of the terminal.
