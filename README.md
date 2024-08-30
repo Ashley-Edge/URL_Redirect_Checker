@@ -97,4 +97,4 @@ Final status & URL: (200) https://www.example.com/cute-dogs
 3. Wednesday 7<sup>th</sup> of August 2024 ~ Made the outputs pretty.
 4. Thursday 8<sup>th</sup> of August 2024 ~ Added more `Headers`, switched from `GET` to `HEAD`to mimic `curl -IL` closer. Added a `requests.Session` to maintain headers and cookies across requests 
 5. Wednesday 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
-6, Thureday 22<sup>nd</sup> of August 2024 ~ created a dynamic line seperator function that bases the number of `-` on the width of the terminal.
+6. Thursday 22<sup>nd</sup> of August 2024 ~ created a dynamic line separator function that bases the number of `-` on the width of the terminal.
