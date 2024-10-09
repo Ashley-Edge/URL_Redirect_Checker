@@ -57,7 +57,7 @@ def check_redirects(base_url, paths):
     for path in paths:
         # Combine the base URL with the relative path
         url = urljoin(base_url, path)
-        print("\n" + dynamic_separator() + "\n")
+        print(dynamic_separator())
         #print(f"Processing URL: {url}\n")
 
         try:
@@ -73,7 +73,7 @@ def check_redirects(base_url, paths):
                 status_chain = [resp.status_code for resp in response.history] + [final_status_code]
                 url_chain = [resp.url for resp in response.history] + [final_url]
                 
-                print(f"♡ Redirect Applied ♡\n")
+                print(f"\n♡ Redirect detected ♡\n")
 
                 # Print the redirect chain in a more readable format
                 print("    Full redirect chain")
@@ -84,18 +84,15 @@ def check_redirects(base_url, paths):
 
                 # Print the status code chain
                 print(f"\n    Status code chain:  {' -> '.join(map(str, status_chain))}")           
-                
-                # Printing out the final status code and URL in a neat box
-                print("\n" + dynamic_separator())
-                print(f"Final status & URL: ({final_status_code}) {final_url}")
+                print(f"\n♡ Final status & URL: ({final_status_code}) {final_url} ♡\n")
             else:
-                print(f"♡ No redirect applied ♡\n")
+                print(f"\n♡ No redirects found ♡\n")
                 print(f"    Complete URL: {url}")
                 print(f"    Status code : {final_status_code}\n")
 
         # Error messages
         except requests.Timeout:
-            print(f"* This request has timed out *\n")
+            print(f"* This request has timed out, try again *\n")
             print(f"    {url}\n")
         except requests.RequestException as e:
             print(f"* Error While Processing {url} *\n")
