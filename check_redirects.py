@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# for more information about this script see: https://akoova.atlassian.net/wiki/x/EoDUv
-
 # Import modules needed
 import sys
 import os
@@ -52,12 +50,13 @@ def check_redirects(base_url, paths):
         'Accept-Encoding': 'gzip, deflate, br',
     }
     session.headers.update(headers)
-
+    print("\n" + dynamic_separator())
     # Loop through each path
     for path in paths:
         # Combine the base URL with the relative path
         url = urljoin(base_url, path)
-        print(dynamic_separator())
+        #print(dynamic_separator())
+        #print("")
         #print(f"Processing URL: {url}\n")
 
         try:
@@ -73,7 +72,7 @@ def check_redirects(base_url, paths):
                 status_chain = [resp.status_code for resp in response.history] + [final_status_code]
                 url_chain = [resp.url for resp in response.history] + [final_url]
                 
-                print(f"\n♡ Redirect detected ♡\n")
+                print(f"♡ Redirect detected ♡\n")
 
                 # Print the redirect chain in a more readable format
                 print("    Full redirect chain")
@@ -83,29 +82,32 @@ def check_redirects(base_url, paths):
                 print(f"        -> Final URL : {url_chain[-1]}")
 
                 # Print the status code chain
-                print(f"\n    Status code chain:  {' -> '.join(map(str, status_chain))}")           
-                print(f"\n♡ Final status & URL: ({final_status_code}) {final_url} ♡\n")
+                print(f"    Status code chain:  {' -> '.join(map(str, status_chain))}")           
+                print(f"\n♡ Final status & URL: ({final_status_code}) {final_url} ♡")
             else:
-                print(f"\n♡ No redirects found ♡\n")
+                print(f"♡ No redirects found ♡")
                 print(f"    Complete URL: {url}")
-                print(f"    Status code : {final_status_code}\n")
+                print(f"    Status code : {final_status_code}")
+            print(dynamic_separator())
 
         # Error messages
         except requests.Timeout:
             print(f"* This request has timed out, try again *\n")
-            print(f"    {url}\n")
+            print(f"    {url}")
+            print(dynamic_separator())
         except requests.RequestException as e:
             print(f"* Error While Processing {url} *\n")
-            print(f"    {e}\n")
-    print(dynamic_separator() + "\n")
+            print(f"    {e}")
+            print(dynamic_separator())
+    print("\n")
 
 
 # Main function that handles argument parsing and calls the check_redirects function
 def main():
     if len(sys.argv) < 3:
-        print("\n" + dynamic_separator() + "\n")
-        print("* Incorrect Usage * Try `python <path to file>/redirect_checker.py <base_url> <path1>`")
-        print("\n" + dynamic_separator() + "\n")
+        print("\n" + dynamic_separator())
+        print("* Incorrect Usage * Try `python <path to file>/check_redirects.py <base_url> <path1>`")
+        print(dynamic_separator() + "\n")
         sys.exit(1)
 
     base_url = sys.argv[1]
