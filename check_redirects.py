@@ -99,7 +99,7 @@ def check_redirects(base_url, paths):
             print(f"* Error While Processing {url} *\n")
             print(f"    {e}")
             print(dynamic_separator())
-    print("\n")
+    print()
 
 
 # Main function that handles argument parsing and calls the check_redirects function
