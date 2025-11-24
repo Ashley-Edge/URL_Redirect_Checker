@@ -37,19 +37,59 @@ import requests
 from urllib.parse import urljoin
 
 
+def fetch_with_fallback(url, timeout=10):
+    """Try HEAD request using curl UA, fallback to Safari UA if 403."""
+
+    # First attempt — curl-like headers
+    primary_headers = {
+        "User-Agent": "curl",
+        "Accept": "*/*",
+        "Connection": "keep-alive",
+        "Accept-Encoding": "gzip, deflate, br",
+    }
+
+    try:
+        response = requests.head(url, allow_redirects=False, timeout=timeout, headers=primary_headers)
+
+        # If WAF/Sucuri blocks curl → retry with Safari UA
+        if response.status_code == 403:
+            print("    ⚠ 403 received — retrying with Safari User-Agent…")
+
+            fallback_headers = {
+                "User-Agent": (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+                ),
+                "Accept": "*/*",
+                "Connection": "keep-alive",
+                "Accept-Encoding": "gzip, deflate, br",
+            }
+
+            response = requests.head(url, allow_redirects=False, timeout=timeout, headers=fallback_headers)
+
+        return response
+
+    except requests.RequestException as e:
+        raise e
+
+
 def check_redirects(base_url, paths):
     # Create a session to maintain state (like cookies)
     session = requests.Session()
 
     # Set headers similar to curl's default headers
-    headers = {
-        'User-Agent': 'curl',
-        'Accept': '*/*',
-        'Referer': base_url,
-        'Connection': 'keep-alive',
-        'Accept-Encoding': 'gzip, deflate, br',
-    }
-    session.headers.update(headers)
+    # headers = {
+    #     #'User-Agent': 'curl',
+    #     "User-Agent": (
+    #         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    #         "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+    #     ),
+    #     'Accept': '*/*',
+    #     'Referer': base_url,
+    #     'Connection': 'keep-alive',
+    #     'Accept-Encoding': 'gzip, deflate, br',
+    # }
+    # session.headers.update(headers)
     print("\n" + dynamic_separator())
     # Loop through each path
     for path in paths:
@@ -62,6 +102,16 @@ def check_redirects(base_url, paths):
         try:
             # Send a HEAD request to match curl -IL behavior
             response = session.head(url, allow_redirects=True, timeout=10)
+            
+            # If we got a 403, retry once with Safari User-Agent
+            if response.status_code == 403:
+                session.headers["User-Agent"] = (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+                )
+                response = session.head(url, allow_redirects=True, timeout=10)
+                # Restore curl UA for next iteration
+                session.headers["User-Agent"] = "curl"
 
             # Get the final URL and status code after all redirects
             final_url = response.url
