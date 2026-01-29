@@ -88,3 +88,5 @@ Final status & URL: (200) https://www.example.com/cute-dogs
 5. Wednesday 14<sup>th</sup> of August 2024 ~ Added `check_dependencies` for the `requests` library, it will prompt the user to install `requirements.txt` if it is not installed.
 6. Thursday 22<sup>nd</sup> of August 2024 ~ created a dynamic line separator function that bases the number of `-` on the width of the terminal.
 7. Tuseday 12<sup>th</sup> of November 2024 ~ Tightended up the output, to much space earlier
+
+End of File
